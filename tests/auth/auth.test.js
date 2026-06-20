@@ -2,7 +2,7 @@
 import { test, expect } from "@playwright/test";
 
 test.use({ storageState: { cookies: [], origins: [] } });
-test.describe("auth", () => {
+test.describe("authorization", () => {
   test("unathorized redirecting & check ui", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveURL(/auth/);
@@ -16,7 +16,7 @@ test.describe("auth", () => {
     await expect(page).toHaveURL(/reg/);
   });
 
-  test("wrong data filled behavior", async ({ page }) => {
+  test("incorrect-data behavior", async ({ page }) => {
     await page.goto("/auth");
     const usernameField = await page.getByRole("textbox", {
       name: "Логин или почта",
