@@ -5,10 +5,11 @@ test.use({ storageState: { cookies: [], origins: [] } });
 test.describe("registration", () => {
   test("redirecting & check ui", async ({ page }) => {
     await page.goto("/reg");
-    await expect(page.getByRole("textbox", { name: "Почта" })).toBeVisible();
-    await expect(page.getByRole("textbox", { name: "Логин" })).toBeVisible();
-    await expect(page.getByRole("textbox", { name: "Пароль" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Создать" })).toBeVisible();
+    await expect(page).toHaveTitle(/Регистрация/);
+    await expect(page.locator("#reg__email")).toBeVisible();
+    await expect(page.locator("#reg__username")).toBeVisible();
+    await expect(page.locator("#reg__password")).toBeVisible();
+    await expect(page.locator("#reg-button")).toBeVisible();
     const loginLink = page.getByRole("main").getByRole("link");
     await loginLink.click();
     await expect(page).toHaveURL(/auth/);
@@ -17,9 +18,9 @@ test.describe("registration", () => {
   test("incorrect-data behavior", async ({ page }) => {
     await page.goto("/reg");
     const emailField = page.locator("#reg__email");
-    const loginField = page.getByRole("textbox", { name: "Логин" });
-    const passwordField = page.getByRole("textbox", { name: "Пароль" });
-    const singUpButton = page.getByRole("button", { name: "Создать" });
+    const loginField = page.locator("#reg__username");
+    const passwordField = page.locator("#reg__password");
+    const singUpButton = page.locator("#reg-button");
     const notifyTip = page.locator("#reg__notify");
 
     let response;

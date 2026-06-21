@@ -5,11 +5,12 @@ test.use({ storageState: { cookies: [], origins: [] } });
 test.describe("authorization", () => {
   test("unathorized redirecting & check ui", async ({ page }) => {
     await page.goto("/");
+    await expect(page).toHaveTitle(/Вход/)
     await expect(page).toHaveURL(/auth/);
     await expect(page.getByRole("link", { name: "Рампус" })).toBeVisible();
-    await expect(page.getByText("Логин или почта")).toBeVisible();
-    await expect(page.getByText("Пароль")).toBeVisible();
-    await expect(page.getByRole("button", { name: "Войти" })).toBeVisible();
+    await expect(page.locator("#email_or_username")).toBeVisible();
+    await expect(page.locator("#password")).toBeVisible();
+    await expect(page.locator("#auth-button")).toBeVisible();
     const registrationLink = page.getByRole("main").getByRole("link");
     await expect(registrationLink).toBeVisible();
     await registrationLink.click();
@@ -18,11 +19,9 @@ test.describe("authorization", () => {
 
   test("incorrect-data behavior", async ({ page }) => {
     await page.goto("/auth");
-    const usernameField = await page.getByRole("textbox", {
-      name: "Логин или почта",
-    });
-    const passwordFiled = await page.getByRole("textbox", { name: "Пароль" });
-    const loginInButton = await page.getByRole("button", { name: "Войти" });
+    const usernameField = await page.locator("#email_or_username");
+    const passwordFiled = await page.locator("#password");
+    const loginInButton = await page.locator("#auth-button");
     const notifyTip = await page.locator("#auth__notify");
 
     await loginInButton.click();
