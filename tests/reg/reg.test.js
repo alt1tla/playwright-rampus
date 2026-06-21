@@ -101,4 +101,23 @@ test.describe("registration", () => {
     await expect(notifyTip).not.toContainClass("reject");
     await passwordField.clear();
   });
+
+  test("create an account", async ({ page }) => {
+    await page.goto("/reg");
+    const emailField = page.locator("#reg__email");
+    const loginField = page.locator("#reg__username");
+    const passwordField = page.locator("#reg__password");
+    const singUpButton = page.locator("#reg-button");
+    const notifyTip = page.locator("#reg__notify");
+
+    await emailField.fill(String(process.env.NEW_USER_EMAIL));
+    await emailField.press("Enter");
+
+    await loginField.fill(String(process.env.NEW_USER_LOGIN));
+    await loginField.press("Enter");
+
+    await passwordField.fill(String(process.env.NEW_USER_PASSWORD));
+    await passwordField.press("Enter");
+    await page.waitForURL("auth");
+  });
 });
