@@ -27,7 +27,12 @@ playwright-rampus
 ├─ playwright.config.js
 ├─ README.md
 └─ tests
-   └─ auth.setup.js
+   ├─ app
+   ├─ auth
+   │  └─ auth.test.js
+   ├─ auth.setup.js
+   └─ reg
+      └─ reg.test.js
 ├─ .env
 └─ playwright
    └─ .auth
