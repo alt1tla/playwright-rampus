@@ -28,6 +28,7 @@ playwright-rampus
 ├─ README.md
 └─ tests
    ├─ app
+   │  └─ profile.test.js
    ├─ auth
    │  └─ auth.test.js
    ├─ auth.setup.js
