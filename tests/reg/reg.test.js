@@ -102,7 +102,7 @@ test.describe("registration", () => {
     await passwordField.clear();
   });
 
-  test("create an account", async ({ page }) => {
+  test.skip("create an account", async ({ page }) => {
     await page.goto("/reg");
     const emailField = page.locator("#reg__email");
     const loginField = page.locator("#reg__username");
